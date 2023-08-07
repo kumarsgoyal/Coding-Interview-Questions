@@ -1,0 +1,45 @@
+
+
+
+
+/*
+
+
+// time: O(n^2)
+// space: O(1)
+
+public class Solution {
+    // DO NOT MODIFY THE LIST. IT IS READ ONLY
+    public int canCompleteCircuit(final List<Integer> A, final List<Integer> B) {
+        int n = A.size();
+        
+        for(int i = 0; i < n; i++) {
+            boolean isCirlce = true; 
+            int fuel = A.get(i); 
+            
+            for(int j = 0; j < n; j++) {
+                int currStation = (i + j) % n; 
+                int nextStation = (currStation + 1) % n;
+                
+                fuel = fuel - B.get(currStation);
+                
+                if(fuel < 0) {
+                    isCirlce = false;
+                    break;
+                }
+                
+                fuel = fuel + A.get(nextStation);
+            }
+            
+            if(isCirlce == true) {
+                return i;
+            }
+            
+        }
+    
+        return -1;
+    }
+}
+
+
+*/
