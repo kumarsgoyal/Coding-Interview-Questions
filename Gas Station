@@ -1,3 +1,26 @@
+// time: O(N)
+// space: O(1)
+
+public class Solution {
+    public int canCompleteCircuit(final List<Integer> A, final List<Integer> B) {
+        int n = A.size();
+        int tank = 0, total = 0, start = 0;
+        
+        for(int i = 0; i < n; i++) {
+            total = total + (A.get(i) - B.get(i));
+            tank = tank + (A.get(i) - B.get(i));
+            if(tank < 0) {
+                start = i + 1;
+                tank = 0;
+            }
+        }
+        
+        if(total < 0)
+            return -1;
+        else 
+            return start;
+    }
+}
 
 
 
