@@ -1,0 +1,103 @@
+// Moore’s Voting Algorithm
+// space: O(1)
+// time : O(N)
+
+public class Solution {
+    public int majorityElement(final List<Integer> A) {
+        return getMajorityElement(A);
+    }
+    
+    private int getMajorityElement(List<Integer> A) { 
+        int cand = getMajorityElementCandidate(A);
+        return isMajorityElement(A, cand);
+    }
+    
+    private int getMajorityElementCandidate(List<Integer> A) {
+        int majorityElement = A.get(0), count = 1;
+        int n = A.size();
+        
+        for(int i = 1; i < n; i++) {
+            if(majorityElement == A.get(i)) 
+                count++;
+            else 
+                count--;
+            
+            if(count == 0) {
+                majorityElement = A.get(i);
+                count = 1;
+            }
+        }
+        
+        return majorityElement;
+    }
+    
+    private int isMajorityElement(List<Integer> A, int cand) {
+        int count = 0;
+        int n = A.size();
+        
+        for(int i = 0; i < n; i++) {
+            if(A.get(i) == cand) 
+                count++;
+        }
+        
+        return (count > (n / 2)) ? cand : -1;
+    }
+}
+
+
+
+/*
+
+// Brute Force
+// space: O(1)
+// time: O(N^2)
+
+public class Solution {
+    public int majorityElement(final List<Integer> A) {
+        int n = A.size();
+        
+        for(int i = 0; i < n; i++) {
+            int count = 0;
+            for(int j = 0; j < n; j++) {
+                if(A.get(i) == A.get(j)) {
+                    count++;
+                }
+            }
+            
+            if(count > (n / 2)) {
+                return A.get(i);
+            }
+        }
+        
+        return -1;
+    }
+}
+
+*/
+
+
+
+
+
+/*
+
+// Hashing
+// space: O(N)
+// time: O(N)
+
+public class Solution {
+    public int majorityElement(final List<Integer> A) {
+        HashMap<Integer, Integer> freqOfElement = new HashMap<> ();
+        int n = A.size();
+        
+        for(int i = 0; i < n; i++) {
+            freqOfElement.put(A.get(i), freqOfElement.getOrDefault(A.get(i), 0) + 1);
+            if(freqOfElement.get(A.get(i)) > (n / 2))
+                return A.get(i);
+        }
+        
+        return -1;
+    }
+}
+
+*/
