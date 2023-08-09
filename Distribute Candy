@@ -1,0 +1,28 @@
+public class Solution {
+    public int candy(int[] A) {
+        int n = A.length, candies = 0;
+        int[] leftToRight = new int[A.length];
+        int[] rightToLeft = new int[A.length];
+        
+        leftToRight[0] = rightToLeft[n - 1] = 0;
+        
+        Arrays.fill(leftToRight, 1);
+        Arrays.fill(rightToLeft, 1);
+        
+        for(int i = 1; i < n; i++) {
+            if(A[i] > A[i - 1]) 
+                leftToRight[i] = leftToRight[i - 1] + 1;
+        }
+        
+        for(int i = n - 2; i >= 0; i--) {
+            if(A[i] > A[i + 1]) 
+                rightToLeft[i] = rightToLeft[i + 1] + 1;
+        }
+        
+        for(int i = 0; i < n; i++) {
+            candies += Math.max(leftToRight[i], rightToLeft[i]);
+        }
+        
+        return candies;
+    }
+}
